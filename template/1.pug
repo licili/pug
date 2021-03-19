@@ -1,0 +1,72 @@
+- var flag = true
+doctype html
+body(class=flag ? 'authed':'anon')
+  p #{name}的pug代码
+  a(href='baidu.com' class='button') 百度
+  input(
+    type='checkbox'
+    name='checkbox'
+    checked
+  ) 
+  // 转义&不转义输出
+  div(escaped='<code>')
+  div(escaped!='<code>')
+  // 这个为注释，如果加了- 就不会出现在结果里
+
+  // 
+    布尔类型做属性的时候 不写默认为true
+    类的字面量. ID的字面量 a#link
+    属性 & div&attributes({'data-foo':'bar'})
+  div(style={color:'red',background:'green'}) xixi
+  a.bng
+  a.bing(class=['11 22 33'])
+
+// 分支条件
+- var friends = 2
+case friends
+  when 0: p 你没有朋友
+  when 2: p 你有2个朋友
+  when 3: p 你有3个朋友
+  default: p 你有#{friends}朋友
+
+ul
+  - for(var x=0;x<3;x++) 
+    li item
+
+
+- var list = ['lici','DOS','SQL','SQLITE']
+each item in list 
+  li=item
+
+
+// 条件
+- var user = {description:'foo bar baz'}
+- var flag = true
+#user
+  if user.description
+    h2.green 描述
+  else if flag 
+    h3.blue 描述
+  else 
+    h4.red 描述
+
+// 包含 include
+// 继承 block extends
+// 嵌入 #{} 
+// 迭代 each while
+// 混入 mixin
+mixin list 
+  ul 
+    li cat 
+    li dog 
+    li bird 
+    li monkey 
+
+//- 使用
++list
+
+mixin pet(name)
+  li.pet= name 
+ul 
+  +pet('猫')
+
